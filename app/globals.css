@@ -1,0 +1,310 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
+
+@font-face {
+  font-family: 'Pixelcraft';
+  src: url('/fonts/Pixelcraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════════
+   Design System: "Chính quyền Học thuật" — State Editorial
+   Inspired by: Government portals, academic journals, editorial press
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --bg-color: #F8F7F4;
+  --bg-paper: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --text-primary: #1A1A2E;
+  --text-secondary: #5C5C78;
+  --accent-color: #B91C1C;
+  --accent-gold: #92400E;
+  --accent-glow: rgba(185, 28, 28, 0.06);
+  --border-color: #E2E0DB;
+  --border-strong: #D1CFC8;
+  --selection-bg: rgba(185, 28, 28, 0.12);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.06);
+  --radius-card: 12px;
+  --radius-btn: 8px;
+}
+
+.dark {
+  --bg-color: #0C0F1A;
+  --bg-paper: #111524;
+  --bg-card: #151929;
+  --text-primary: #E8E6F0;
+  --text-secondary: #8A8AAA;
+  --accent-color: #EF4444;
+  --accent-gold: #D4A72C;
+  --accent-glow: rgba(239, 68, 68, 0.08);
+  --border-color: #1E2235;
+  --border-strong: #282D42;
+  --selection-bg: rgba(239, 68, 68, 0.2);
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-hover: 0 4px 16px rgba(0,0,0,0.3);
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased transition-colors duration-300 relative min-h-screen overflow-x-hidden;
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold transition-colors duration-300;
+    color: var(--text-primary);
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-extrabold;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-bold;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-bold;
+  }
+
+  h4 {
+    @apply text-lg md:text-xl font-bold;
+  }
+
+  p {
+    @apply leading-relaxed mb-4;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+    color: var(--accent-color);
+  }
+  a:hover {
+    color: var(--accent-gold);
+  }
+
+  button {
+    @apply transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .font-serif-body {
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  .font-serif-heading {
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    letter-spacing: -0.02em;
+  }
+  
+  .font-sans {
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .pixel-font {
+    font-family: 'Pixelcraft', 'Be Vietnam Pro', 'Segoe UI', Arial, sans-serif;
+  }
+
+  .container-custom {
+    @apply max-w-[1240px] mx-auto px-6 md:px-8;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* ── Card System: Solid, Editorial, Strong borders ── */
+  .vintage-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s ease;
+  }
+
+  .modern-glass {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s ease;
+  }
+
+  .modern-glass-hover {
+    cursor: pointer;
+  }
+  .modern-glass-hover:hover {
+    border-color: var(--accent-color);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+
+  .military-box {
+    background: #111827;
+    color: #E5E7EB;
+    border: 1px solid #1F2937;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s ease;
+  }
+  
+  .red-box {
+    background: #450A0A;
+    color: white;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    transition: all 0.2s ease;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.35s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Typography Scale */
+.text-hero {
+  @apply text-5xl md:text-7xl font-extrabold leading-tight;
+  letter-spacing: -0.03em;
+}
+
+.text-section-title {
+  @apply text-3xl md:text-4xl font-bold mb-8 relative inline-block;
+}
+
+.text-section-title::after {
+  content: '';
+  @apply absolute -bottom-3 left-0 w-16 h-1;
+  background: var(--accent-color);
+}
+
+.text-card-title {
+  @apply text-2xl font-semibold mb-4;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--selection-bg);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: var(--selection-bg);
+  color: inherit;
+}
+
+/* Focus Visible */
+*:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions — keep it snappy, not sluggish */
+* {
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* ── Host Lobby Custom Radar & Terminal Animations ── */
+.radar-ring {
+  position: absolute;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 50%;
+  animation: host-radar-pulse 3s infinite linear;
+}
+
+.radar-ring:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.radar-ring:nth-child(3) {
+  animation-delay: 2s;
+}
+
+@keyframes host-radar-pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  15% {
+    border-color: rgba(239, 68, 68, 0.4);
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(239, 68, 68, 0.4), transparent);
+  animation: radar-scan 4s infinite linear;
+}
+
+@keyframes radar-scan {
+  0% {
+    top: 0%;
+  }
+  50% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
+}
+

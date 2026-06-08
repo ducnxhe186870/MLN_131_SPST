@@ -425,10 +425,21 @@ export default function Home() {
         <div className="h-[3px] w-full" style={{ background: 'var(--accent-color)', opacity: 0.15 }} />
         <div className="py-5" style={{ backgroundColor: 'var(--bg-paper)' }}>
           <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-3 text-[11px]" style={{ color: 'var(--text-secondary)' }}>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-3">
               <strong className="font-bold" style={{ color: 'var(--text-primary)' }}>Chuyên đề PCTN</strong>
               <span style={{ color: 'var(--border-strong)' }}>·</span>
               <span>SE1867 — Nhóm 5</span>
+              <span style={{ color: 'var(--border-strong)' }}>·</span>
+              <button 
+                onClick={() => window.dispatchEvent(new CustomEvent("trigger-dev-secret"))}
+                className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-extrabold border border-red-500/25 bg-red-500/5 hover:bg-red-500/10 hover:border-red-500/50 text-red-600 dark:text-red-400 cursor-pointer shadow-[0_0_8px_rgba(239,68,68,0.04)] hover:shadow-[0_0_12px_rgba(239,68,68,0.12)] transition-all duration-300 select-none"
+              >
+                <span className="relative flex h-1.5 w-1.5 animate-pulse">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                </span>
+                <span>DEV BY: N.X.ĐỨC - HE186870</span>
+              </button>
             </div>
             <div className="font-medium">
               Học phần: Chủ nghĩa xã hội khoa học

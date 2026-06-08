@@ -7,6 +7,8 @@ import ChatBot from '@/components/AIChatbot'
 export const metadata = {
   title: 'Nhà nước Pháp quyền Xã hội Chủ nghĩa Việt Nam | 1975 - 1981',
   description: 'Giai đoạn Đảng lãnh đạo cả nước xây dựng chủ nghĩa xã hội và bảo vệ Tổ quốc',
+  authors: [{ name: 'Nguyễn Xuân Đức', url: 'https://github.com/ducnxhe186870' }],
+  creator: 'Nguyễn Xuân Đức - HE186870',
 }
 
 export default function RootLayout({ children }) {
@@ -22,3 +24,4 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+

@@ -344,51 +344,96 @@ export default function GamePage() {
       >
         {/* Top bar */}
         <div
-          className="flex items-center justify-between px-4 py-3 border-b-2 border-[#333] shrink-0"
-          style={{ background: "rgba(0,0,0,0.3)" }}
+          className="flex items-center justify-between px-6 py-3 border-b border-slate-800 bg-[#090b16]/95 shrink-0"
         >
-          <Link href="/" className="pixel-font text-[11px] sm:text-[13px] text-[#888] hover:text-[#FFD700] transition-colors">
-            ← THOÁT
+          <Link href="/" className="pixel-font text-[10px] sm:text-[11px] text-slate-400 hover:text-[#FFD700] hover:scale-105 transition-all bg-slate-900/80 border border-slate-800 px-3 py-1.5 rounded-xl font-bold cursor-pointer">
+            ← THOÁT GAME
           </Link>
-          <span className="pixel-font text-[11px] sm:text-[13px] text-[#FFD700]">
+          <span className="pixel-font text-[10px] sm:text-[12px] text-[#FFD700] font-bold text-center tracking-wider [text-shadow:0_0_8px_rgba(255,215,0,0.2)]">
             NHÀ NƯỚC PHÁP QUYỀN XÃ HỘI CHỦ NGHĨA VIỆT NAM — XÂY DỰNG & BẢO VỆ TỔ QUỐC
           </span>
-          <span className="pixel-font text-[11px] sm:text-[13px] text-[#555]">v2.0</span>
+          <span className="pixel-font text-[10px] sm:text-[11px] text-slate-500 bg-slate-900/80 border border-slate-850 px-2.5 py-1 rounded-xl font-semibold">
+            v2.2
+          </span>
         </div>
 
         {/* HUD */}
         {(screen === "combat" || screen === "quiz") && (
           <div
-            className="flex items-center justify-between px-5 py-3 border-b border-[#222] flex-wrap gap-2 shrink-0"
-            style={{ background: "rgba(0,0,0,0.2)" }}
+            className="grid grid-cols-1 md:grid-cols-3 items-center px-6 py-3.5 border-b border-slate-800 bg-[#090b16]/95 shrink-0 gap-4"
           >
-            <div className="flex items-center gap-1">
-              <span className="pixel-font text-[12px] text-[#888] mr-1">HP</span>
-              <div className="flex gap-0.5">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <PixelHeart key={i} filled={i < hp} />
-                ))}
+            {/* Left Column: Player Health & Upgrades */}
+            <div className="flex items-center gap-4 flex-wrap">
+              <div className="flex flex-col gap-1 bg-slate-900/60 border border-slate-850/80 px-3 py-1.5 rounded-xl shadow-inner">
+                <span className="pixel-font text-[8px] text-slate-500 uppercase tracking-widest font-bold">Sinh mệnh (HP)</span>
+                <div className="flex gap-1 items-center">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <PixelHeart key={i} filled={i < hp} />
+                  ))}
+                </div>
+              </div>
+              
+              <div className="flex flex-col gap-1 bg-slate-900/60 border border-slate-850/80 px-3 py-1.5 rounded-xl shadow-inner min-h-[38px] justify-center">
+                <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Nâng cấp hoạt động</span>
+                <div className="flex gap-1.5 flex-wrap">
+                  {activeUpgrades.length > 0 ? (
+                    activeUpgrades.map((up, i) => (
+                      <span key={i} className="pixel-font text-[8px] bg-purple-500/10 text-purple-400 border border-purple-500/25 px-1.5 py-0.5 rounded uppercase font-semibold">
+                        {up}
+                      </span>
+                    ))
+                  ) : (
+                    <span className="pixel-font text-[8px] text-slate-600 italic">Trống</span>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="pixel-font text-[13px] sm:text-[14px] text-[#aaa]">
-              ĐẠN: <span className={ammo <= 5 ? "text-[#ff4444]" : "text-[#4fc3f7]"}>{ammo}</span>
-            </div>
-            <div className="pixel-font text-[12px] text-[#aaa]" title="Lựu đạn (phím E)">
-              💣 <span className={bombs <= 0 ? "text-[#666]" : "text-[#ff9944]"}>{bombs}</span>
-            </div>
-            <div className="pixel-font text-[11px] sm:text-[12px] text-[#FFD700]" title={`Súng: ${currentWeaponData?.name} — phím Q để đổi`}>
-              {currentWeaponData?.emoji} {currentWeaponData?.name}
-            </div>
-            {activeUpgrades.length > 0 && (
-              <div className="pixel-font text-[11px] sm:text-[12px] text-[#a855f7]">
-                {activeUpgrades.join(" ")}
+
+            {/* Center Column: Weapons, Ammo, Bombs */}
+            <div className="flex justify-center items-center gap-4">
+              {/* Equipped Weapon Card */}
+              <div className="flex items-center gap-3 bg-[#12122a] border border-[#FFD700]/30 px-3.5 py-1.5 rounded-xl shadow-md">
+                <span className="text-xl animate-pulse select-none">{currentWeaponData?.emoji}</span>
+                <div className="flex flex-col">
+                  <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Vũ khí</span>
+                  <span className="pixel-font text-[11px] text-[#FFD700] font-black">{currentWeaponData?.name}</span>
+                </div>
               </div>
-            )}
-            <div className="pixel-font text-[13px] sm:text-[14px] text-[#FFD700]">
-              ⬡ {score.toString().padStart(5, "0")}
+
+              {/* Ammo Indicator */}
+              <div className="flex flex-col bg-slate-900/80 border border-slate-800 px-4 py-1.5 rounded-xl text-center min-w-[70px]">
+                <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Đạn</span>
+                <span className={`pixel-font text-[13px] font-black ${ammo <= 5 ? "text-[#ff4444] animate-pulse" : "text-[#4fc3f7]"}`}>
+                  {ammo}
+                </span>
+              </div>
+
+              {/* Bombs Indicator */}
+              <div className="flex flex-col bg-slate-900/80 border border-slate-800 px-4 py-1.5 rounded-xl text-center min-w-[60px]" title="Lựu đạn (phím E)">
+                <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Lựu đạn</span>
+                <span className={`pixel-font text-[13px] font-black ${bombs <= 0 ? "text-slate-600" : "text-[#ff9944]"}`}>
+                  💣 {bombs}
+                </span>
+              </div>
             </div>
-            <div className="pixel-font text-[12px] text-[#888]">
-              LV{level + 1} • W{waveIdx + 1}/{totalQ}
+
+            {/* Right Column: Score, Level, Wave */}
+            <div className="flex items-center justify-end gap-4 flex-wrap">
+              {/* Level & Wave */}
+              <div className="flex flex-col bg-slate-900/60 border border-slate-850/80 px-3 py-1.5 rounded-xl text-right">
+                <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Tiến trình</span>
+                <span className="pixel-font text-[11px] text-slate-300 font-bold">
+                  LV{level + 1} • W{waveIdx + 1}/{totalQ}
+                </span>
+              </div>
+
+              {/* Score Card */}
+              <div className="flex flex-col bg-[#12122a] border border-[#FFD700]/25 px-4 py-1.5 rounded-xl text-right shadow-[0_0_15px_rgba(255,215,0,0.05)]">
+                <span className="pixel-font text-[7px] text-slate-500 uppercase tracking-widest font-bold">Điểm số</span>
+                <span className="pixel-font text-[14px] text-[#FFD700] font-black tracking-wider">
+                  ⬡ {score.toString().padStart(5, "0")}
+                </span>
+              </div>
             </div>
           </div>
         )}
@@ -402,48 +447,51 @@ export default function GamePage() {
               exit={{ opacity: 0 }}
               className="w-full h-full"
             >
-              <div className="relative w-full h-full">
-                <ShooterArena
-                  levelData={levelData}
-                  levelIndex={level}
-                  onWaveCleared={onWaveCleared}
-                  onAmmoEmpty={onAmmoEmpty}
-                  setHp={setHp}
-                  ammo={ammo}
-                  setAmmo={setAmmo}
-                  setScore={setScore}
-                  waveNum={waveIdx}
-                  weaponId={effectiveWeaponId}
-                  upgrades={upgradeCounts}
-                  bombs={bombs}
-                  setBombs={setBombs}
-                  ownedWeapons={ownedWeapons}
-                  onWeaponSwitch={onWeaponSwitch}
-                  paused={screen !== "combat"}
-                />
+              <div className="relative w-full h-full bg-[#05060b] flex items-center justify-center p-2">
+                {/* CRT Monitor Outer Bezel decoration */}
+                <div className="relative w-full h-full border-4 border-slate-900 rounded-2xl overflow-hidden shadow-[inset_0_0_50px_rgba(0,0,0,0.9),0_0_35px_rgba(0,0,0,0.7)] bg-black">
+                  <ShooterArena
+                    levelData={levelData}
+                    levelIndex={level}
+                    onWaveCleared={onWaveCleared}
+                    onAmmoEmpty={onAmmoEmpty}
+                    setHp={setHp}
+                    ammo={ammo}
+                    setAmmo={setAmmo}
+                    setScore={setScore}
+                    waveNum={waveIdx}
+                    weaponId={effectiveWeaponId}
+                    upgrades={upgradeCounts}
+                    bombs={bombs}
+                    setBombs={setBombs}
+                    ownedWeapons={ownedWeapons}
+                    onWeaponSwitch={onWeaponSwitch}
+                    paused={screen !== "combat"}
+                  />
 
-                {screen === "quiz" && currentQuestion && (
-                  <div className="absolute inset-0 overflow-auto bg-black/45">
-                    <QuizScreen
-                      key={`quiz-${level}-${waveIdx}-${quizRetry}`}
-                      question={currentQuestion}
-                      onAnswer={onQuizAnswer}
-                    />
-                  </div>
-                )}
+                  {screen === "quiz" && currentQuestion && (
+                    <div className="absolute inset-0 overflow-auto bg-black/45 backdrop-blur-sm z-30">
+                      <QuizScreen
+                        key={`quiz-${level}-${waveIdx}-${quizRetry}`}
+                        question={currentQuestion}
+                        onAnswer={onQuizAnswer}
+                      />
+                    </div>
+                  )}
 
-                {screen === "upgrade" && (
-                  <div className="absolute inset-0 overflow-auto bg-black/45">
-                    <UpgradeScreen
-                      key={`upgrade-${level}-${waveIdx}`}
-                      choices={upgradeChoices.map((u) => ({
-                        upgrade: u,
-                        stacks: upgradeCounts[u.id] || 0,
-                      }))}
-                      onPick={onUpgradePick}
-                    />
-                  </div>
-                )}
+                  {screen === "upgrade" && (
+                    <div className="absolute inset-0 overflow-auto bg-black/45 backdrop-blur-sm z-30">
+                      <UpgradeScreen
+                        key={`upgrade-${level}-${waveIdx}`}
+                        choices={upgradeChoices.map((u) => ({
+                          upgrade: u,
+                          stacks: upgradeCounts[u.id] || 0,
+                        }))}
+                        onPick={onUpgradePick}
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
             </motion.div>
           ) : (

@@ -30,6 +30,26 @@ export default function Navbar() {
     { name: "Thành viên", path: ROUTES.THANHVIEN }
   ];
 
+  const [logoClicks, setLogoClicks] = useState(0);
+  const [lastClickTime, setLastClickTime] = useState(0);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    const now = Date.now();
+    if (now - lastClickTime > 2000) {
+      setLogoClicks(1);
+    } else {
+      const nextClicks = logoClicks + 1;
+      if (nextClicks >= 5) {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent("trigger-dev-secret"));
+        setLogoClicks(0);
+      } else {
+        setLogoClicks(nextClicks);
+      }
+    }
+    setLastClickTime(now);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full">
       {/* Top Accent Strip */}
@@ -47,7 +67,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto h-14 flex items-center justify-between px-6">
           
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" onClick={handleLogoClick} className="flex items-center gap-3 group">
             {/* Emblem */}
             <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-extrabold text-xs"
               style={{ background: 'var(--accent-color)' }}

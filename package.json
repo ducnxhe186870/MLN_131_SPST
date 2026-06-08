@@ -2,6 +2,7 @@
   "name": "MLN131",
   "version": "0.1.0",
   "private": true,
+  "author": "Nguyễn Xuân Đức - HE186870",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
